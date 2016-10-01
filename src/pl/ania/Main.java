@@ -34,19 +34,22 @@ public class Main {
     }
 
     public static void addCat() {
-        System.out.println("Podaj imię kota");
-        String userChoice = reading.nextLine();
         Cat cat = new Cat();
-        cat.setName(userChoice);
-        System.out.println("Podaj imię opiekna kota");
-        userChoice = reading.nextLine();
-        cat.setCatSitterName(userChoice);
+        cat.setName(readName("Podaj imie kota"));
+        cat.setCatSitterName(readName("Podaj imię opiekuna kota"));
         System.out.println("Dziękuję. Znam już imię kota oraz jego opiekuna");
 
 
         cat.setBirthDate(readChoice("Podaj date urodzenia kota w formacie RRRR.MM.DD", new DateChecker()));
 
         cat.setWeight(readChoice("Podaj wagę kota", new FloatChecker()));
+    }
+
+
+    static private String readName(String message){
+        System.out.println(message);
+        String userChoice = reading.nextLine();
+        return userChoice;
     }
 
     static private <T> T readChoice(String message, Checker<T> checker) {
