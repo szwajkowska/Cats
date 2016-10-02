@@ -1,11 +1,12 @@
 package pl.ania;
 
-import java.text.ParseException;
+
 import java.util.Scanner;
 
 public class Main {
 
     static Scanner reading = new Scanner(System.in);
+    static CatDAO catDAO = new CatDAO();
 
 
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class Main {
             if (userChoice.equals("1")) {
                 addCat();
             } else if (userChoice.equals("2")) {
-                System.out.println("showCat()");
+                showCat();
 
             } else if (userChoice.equalsIgnoreCase("x")) {
                 System.out.println("Do widzenia!");
@@ -39,14 +40,15 @@ public class Main {
         cat.setCatSitterName(readName("Podaj imię opiekuna kota"));
         System.out.println("Dziękuję. Znam już imię kota oraz jego opiekuna");
 
-
         cat.setBirthDate(readChoice("Podaj date urodzenia kota w formacie RRRR.MM.DD", new DateChecker()));
 
         cat.setWeight(readChoice("Podaj wagę kota", new FloatChecker()));
+
+        catDAO.addCatToList(cat);
+
     }
 
-
-    static private String readName(String message){
+    static private String readName(String message) {
         System.out.println(message);
         String userChoice = reading.nextLine();
         return userChoice;
@@ -68,5 +70,25 @@ public class Main {
 
         } while (!isCorrect);
         return checkerResult;
+    }
+
+    static public void showCat() {
+
+        if (!catDAO.cats.isEmpty()) {
+            for (int i = 0; i < catDAO.cats.size(); i++) {
+                System.out.println(catDAO.cats.get(i).getName() + " - wybierz " + (i + 1));
+            }
+            String userChoice = reading.nextLine();
+            try {
+                System.out.println(catDAO.cats.get(Integer.parseInt(userChoice) - 1).introduceYourself());
+            }
+            catch (IndexOutOfBoundsException ioobe){
+                System.out.println("Nie ma takiego kota!");
+            }
+        }
+
+        else  {
+            System.out.println("Nie ma kotów na liście!");
+        }
     }
 }

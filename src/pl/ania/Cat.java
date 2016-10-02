@@ -42,8 +42,12 @@ public class Cat {
     }
 
     public String introduceYourself() {
-        System.out.println("Jestem kotem o imieniu " + name + ". Moja data urodzenia to " + birthDate + ". Ważę " + weight + " kg. Imię omojego opiekuna to " + catSitterName + ".");
+
         return "Jestem kotem o imieniu " + name + ". Moja data urodzenia to " + birthDate + ". Ważę " + weight + " kg. Imię omojego opiekuna to " + catSitterName + ".";
 
+    }
+
+    public String toString(){
+        return "Czesc! Jestem kot " + name + ".";
     }
 }
