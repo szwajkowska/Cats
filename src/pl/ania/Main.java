@@ -85,6 +85,9 @@ public class Main {
             catch (IndexOutOfBoundsException ioobe){
                 System.out.println("Nie ma takiego kota!");
             }
+            catch (NumberFormatException nfe){
+                System.out.println("Nie ma takiego kota!");
+            }
         }
 
         else  {
